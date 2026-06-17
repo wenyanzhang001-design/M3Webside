@@ -1,0 +1,225 @@
+/* ================================================================
+   M3导航网站 - 纯净版
+   背景色：#e8e8e8
+   卡片样式：翻转卡片.txt（Uiverse.io/JustCode14）
+   ================================================================ */
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    background: #e8e8e8 !important;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1a1a1a;
+}
+
+/* ========== 顶栏 ========== */
+.page-header {
+    position: sticky; top: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.header-logo { display: flex; align-items: center; gap: 14px; }
+.header-logo img { height: 36px; }
+.header-title { font-size: 18px; font-weight: 700; color: #1a1a1a; letter-spacing: 2px; }
+.header-lang { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.lang-active { color: #555 !important; font-weight: 600; text-decoration: none; cursor: default; }
+.lang-divider { color: rgba(0,0,0,0.2); }
+.lang-link { color: rgba(0,0,0,0.4); text-decoration: none; transition: color 0.3s; }
+.lang-link:hover { color: #1a1a1a; }
+
+/* ========== 分类标签（白色按钮.txt - doniaskima）========== */
+.section-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 20px 40px 0;
+}
+.tag-item {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: button;
+    background-color: #000;
+    background-image: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+    box-sizing: border-box;
+    display: block;
+    font-weight: 900;
+    padding: 1.5rem 3.75rem;
+    perspective: 800px;
+    position: relative;
+    text-transform: uppercase;
+    transform-style: preserve-3d;
+    text-decoration: none;
+}
+.tag-item span {
+    background: #fff;
+    color: #000;
+    display: grid;
+    inset: 0;
+    place-items: center;
+    position: absolute;
+    border-radius: 0;
+    transform: rotateX(0deg);
+    transform-origin: top center;
+    transition: 0.2s;
+}
+.tag-item:hover span {
+    transform: rotateX(35deg);
+}
+.tag-item:after, .tag-item:before {
+    background: #ddd;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: rotateX(0deg);
+    width: 100%;
+    z-index: -1;
+}
+.tag-item:after {
+    background: #ccc;
+    width: 0;
+}
+.tag-item:hover:after {
+    -webkit-animation: progress-bar 1.2s;
+    animation: progress-bar 1.2s;
+}
+@-webkit-keyframes progress-bar {
+    0% { opacity: 1; width: 0; }
+    10% { opacity: 1; width: 15%; }
+    25% { opacity: 1; width: 25%; }
+    40% { opacity: 1; width: 35%; }
+    55% { opacity: 1; width: 75%; }
+    60% { opacity: 1; width: 100%; }
+    to { opacity: 0; width: 100%; }
+}
+@keyframes progress-bar {
+    0% { opacity: 1; width: 0; }
+    10% { opacity: 1; width: 15%; }
+    25% { opacity: 1; width: 25%; }
+    40% { opacity: 1; width: 35%; }
+    55% { opacity: 1; width: 75%; }
+    60% { opacity: 1; width: 100%; }
+    to { opacity: 0; width: 100%; }
+}
+
+/* ========== 主内容 ========== */
+.page-main { width: 100%; padding: 20px 40px 40px; }
+
+/* ========== 区块标题 ========== */
+.section-title { font-size: 15px; font-weight: 700; color: #1a1a1a; margin: 30px 0 16px; letter-spacing: 1px; }
+
+/* ========== 卡片网格 ========== */
+.card-grid { display: flex; flex-wrap: wrap; gap: 20px; width: 100%; justify-content: flex-start; }
+
+/* ========== 翻转卡片（JustCode14 from Uiverse.io）========== */
+.flip-card {
+    background-color: transparent;
+    width: 190px;
+    height: 254px;
+    perspective: 1000px;
+    font-family: sans-serif;
+    flex-shrink: 0;
+}
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transition-timing-function: cubic-bezier(0.61, 0.98, 0.48, 1.01);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 1rem;
+    padding: 20px;
+}
+.flip-card-front {
+    background: #ffffff;
+    color: #000;
+}
+.flip-card-back {
+    background: #1a1a1a;
+    color: #ffffff;
+    transform: rotateY(180deg);
+}
+.flip-card-front .card-logo {
+    width: 56px; height: 56px; border-radius: 12px;
+    overflow: hidden; margin-bottom: 14px; flex-shrink: 0;
+    background: #f5f5f5; padding: 4px;
+    display: flex; align-items: center; justify-content: center;
+}
+.flip-card-front .card-logo img { width: 100%; height: 100%; object-fit: contain; }
+.flip-card-front .card-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.2; }
+.flip-card-front .card-desc {
+    font-size: 11px; color: #555; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden; text-align: center; word-break: break-all;
+}
+.flip-card-back .card-logo {
+    width: 56px; height: 56px; border-radius: 12px;
+    overflow: hidden; margin-bottom: 14px; flex-shrink: 0;
+    background: rgba(255,255,255,0.1); padding: 4px;
+    display: flex; align-items: center; justify-content: center;
+}
+.flip-card-back .card-logo img { width: 100%; height: 100%; object-fit: contain; }
+.flip-card-back .card-title { font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+.flip-card-back .card-desc {
+    font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden; text-align: center; word-break: break-all;
+}
+
+/* ========== 底部 ========== */
+.page-footer { text-align: center; padding: 30px; color: rgba(0,0,0,0.25); font-size: 14px; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 1024px) {
+    .page-header, .page-main, .section-tags { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 768px) {
+    .card-grid { gap: 14px; }
+    .flip-card { width: 160px; height: 220px; }
+    .flip-card-front, .flip-card-back { padding: 16px; }
+    .flip-card-front .card-logo, .flip-card-back .card-logo { width: 44px; height: 44px; margin-bottom: 10px; }
+    .flip-card-front .card-title, .flip-card-back .card-title { font-size: 14px; }
+    .flip-card-front .card-desc, .flip-card-back .card-desc { font-size: 10px; -webkit-line-clamp: 2; }
+    .section-title { font-size: 14px; }
+    .page-header, .page-main, .section-tags { padding-left: 16px; padding-right: 16px; }
+    .tag-item { padding: 6px 12px; font-size: 13px; }
+}
+@media (max-width: 480px) {
+    .card-grid { gap: 12px; }
+    .flip-card { width: 140px; height: 200px; }
+    .flip-card-front, .flip-card-back { padding: 14px; }
+    .flip-card-front .card-logo, .flip-card-back .card-logo { width: 40px; height: 40px; }
+    .flip-card-front .card-title, .flip-card-back .card-title { font-size: 13px; }
+    .flip-card-front .card-desc, .flip-card-back .card-desc { font-size: 10px; }
+    .section-title { font-size: 13px; }
+    .page-header { padding: 10px 12px; }
+    .header-title { font-size: 14px; }
+}

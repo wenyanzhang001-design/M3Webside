@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>码头查询测试</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; }
+        .container { display: flex; height: 100vh; }
+        .sidebar { width: 200px; background: #2c3e50; color: #fff; }
+        .sidebar h2 { padding: 20px; font-size: 18px; background: #1a252f; }
+        .sidebar ul { list-style: none; }
+        .sidebar li { padding: 15px 20px; cursor: pointer; border-bottom: 1px solid #34495e; }
+        .sidebar li:hover, .sidebar li.active { background: #34495e; }
+        .content { flex: 1; padding: 20px; background: #fff; }
+        .content iframe { width: 100%; height: calc(100vh - 40px); border: 1px solid #ddd; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>码头查询</h2>
+            <ul>
+                <li class="active" onclick="show('goct')">二期 GOCT 库存</li>
+                <li onclick="show('nict')">三期 NICT</li>
+                <li onclick="show('arrival')">三期运抵</li>
+            </ul>
+        </div>
+        <div class="content">
+            <iframe id="goct" src="http://localhost:8080/api/query/terminal3"></iframe>
+            <iframe id="nict" class="hidden" src="http://localhost:8080/api/query/terminal2"></iframe>
+            <iframe id="arrival" class="hidden" src="https://e.gznict.com/inspection.view.ArrivalReportActivation.d"></iframe>
+        </div>
+    </div>
+    <script>
+        function show(id) {
+            document.querySelectorAll('iframe').forEach(f => f.classList.add('hidden'));
+            document.querySelectorAll('.sidebar li').forEach(l => l.classList.remove('active'));
+            document.getElementById(id).classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
